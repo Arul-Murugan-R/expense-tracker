@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer components{
+    .link{
+        @apply p-2 px-5 rounded-md font-bold text-xl mt-2 cursor-pointer flex gap-2;
+    }
+    .link:hover,.link.active{
+        @apply bg-gray-700;
+    }
+    .button{
+        @apply bg-yellow-500 text-gray-100 p-2 px-5 rounded-md font-bold text-xl mt-2 cursor-pointer flex gap-2;
+    }
+    .card{
+        @apply p-4 rounded-3xl bg-slate-900 min-w-48 text-gray-300;
+    }
+    .card small{
+        @apply text-xs;
+    }
+    .card span img{
+        @apply rounded-full my-3 bg-slate-700 p-1;
+    }
+    .card h3{
+        @apply font-extrabold text-xl;
+    }
+    /* .card:nth-child(2){
+        @apply bg-purple-400;
+    }
+    .card:nth-child(3){
+        @apply bg-green-400;
+    }
+    .card:nth-child(4){
+        @apply bg-orange-300;
+    } */
+    .activity-link{
+        @apply flex gap-5 place-items-center mt-3 rounded-md border border-slate-500 p-2;
+    }
+}
