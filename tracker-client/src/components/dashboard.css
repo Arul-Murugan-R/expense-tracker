@@ -12,7 +12,7 @@
         @apply bg-yellow-500 text-gray-100 p-2 px-5 rounded-md font-bold text-xl mt-2 cursor-pointer flex gap-2;
     }
     .card{
-        @apply p-4 rounded-3xl bg-slate-900 min-w-48 text-gray-300;
+        @apply p-4 rounded-lg bg-slate-900 min-w-48 text-gray-300;
     }
     .card small{
         @apply text-xs;

@@ -4,7 +4,15 @@ export default function Today() {
   return (
     <div className=''>
     <div className='max-w-[500px] text-white grid gap-5'>
-        <h2 className="text-2xl text-extrabold">Activities</h2>
+        <h2 className="text-2xl text-extrabold">Today Activities</h2>
+        <div className='bg-slate-700 p-3'>
+          <h6 className="text-2xl text-bold text-yellow-500">
+            Amount Spent
+          </h6>
+          <h3 className="text-xl text-bold">
+            $4000.00
+          </h3>
+        </div>
         <div className='flex justify-between py-2'>
           <h2 className="text-lg">Transaction</h2>
           <button className="button m-0 p-2 text-xs" 

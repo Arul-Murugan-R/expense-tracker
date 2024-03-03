@@ -17,10 +17,7 @@ export default function Dashboard() {
         <a href="#" class="inline-block w-full p-2 border-r border-gray-700 rounded-s-lg focus:ring-4 active focus:outline-none bg-gray-700 text-white" aria-current="page">Last 7 days</a>
     </li>
     <li class="w-full focus-within:z-10">
-        <a href="#" class="inline-block w-full p-2 border-r border-gray-700 focus:ring-4 focus:outline-none hover:text-white bg-gray-800 hover:bg-gray-700">Last month</a>
-    </li>
-    <li class="w-full focus-within:z-10">
-        <a href="#" class="inline-block w-full p-2 border-s-0 border-gray-700 rounded-e-lg focus:ring-4 focus:outline-none hover:text-white bg-gray-800 hover:bg-gray-700">Last year</a>
+        <a href="#" class="inline-block w-full p-2 border-r rounded-r-lg border-gray-700 focus:ring-4 focus:outline-none hover:text-white bg-gray-800 hover:bg-gray-700">Last month</a>
     </li>
 </ul>
             <h2 class="text-white text-2xl font-extrabold mb-4">Welcome back, Jim!
@@ -37,7 +34,7 @@ export default function Dashboard() {
                 <span><img src="/icons/food.png" alt="" />
                       </span>
                     <h3>₹ 300/<small>1500</small></h3>
-                    <p>Food & Groceries</p>
+                    <p>Food</p>
                 </div>
                 <div class="card">
                 <span><img src="/icons/travel.png" alt="" />
@@ -58,45 +55,82 @@ export default function Dashboard() {
               <Link to="/activities" className='text-sm float-end text-blue-700 underline'>See all</Link>
               </h2> 
               <ul>
-                <li className='activity-link'>
-                  <img src="/icons/travel.png" alt="" />
-                  <div>
-                    <h1>Travel</h1>
-                    <p>Long way to coorg</p>
-                  </div>
-                  <p class="text-red-500">You owe</p>
-                  <p class="text-red-500">-$122.00</p>
-                </li>
-                <li className='activity-link'>
-                  <img src="/icons/food.png" alt="" />
-                  <div>
-                    <h1>Travel</h1>
-                    <p>Long way to coorg</p>
-                  </div>
-                  <p class="text-green-500">You get back</p>
-                  <p class="text-green-500">-$122.00</p>
-                </li>
-                <li className='activity-link'>
-                  <img src="/icons/travel.png" alt="" />
-                  <div>
-                    <h1>Travel</h1>
-                    <p>Long way to coorg</p>
-                  </div>
-                  <p class="text-red-500">You owe</p>
-                  <p class="text-red-500">-$122.00</p>
-                </li>
-                <li className='activity-link'>
-                  <img src="/icons/food.png" alt="" />
-                  <div>
-                    <h1>Travel</h1>
-                    <p>Long way to coorg</p>
-                  </div>
-                  <p class="text-green-500">You get back</p>
-                  <p class="text-green-500">-$122.00</p>
-                </li>
+            <li className="activity-link relative">
+              <img
+                className="h-8 w-8 p-1 rounded-full bg-slate-400"
+                src="/icons/travel.png"
+                alt=""
+              />
+              <div>
+                <label className="text-sm border border-orange-500 rounded-md px-2 text-orange-500">
+                  Travel
+                </label>
+                <p className="text-sm">Long way to coorg</p>
+              </div>
+              <div className="flex absolute end-3 gap-3">
+                <p className="text-green-500">You owe</p>
+                <p className="text-green-500">-$122.00</p>
+                <img className="h-6" src="/icons/edit.png" alt="" />
+              </div>
+            </li>
+            <li className="activity-link relative">
+              <img
+                className="h-8 w-8 p-1 rounded-full bg-slate-400"
+                src="/icons/travel.png"
+                alt=""
+              />
+              <div>
+                <label className="text-sm border border-orange-500 rounded-md px-2 text-orange-500">
+                  Travel
+                </label>
+                <p className="text-sm">Long way to coorg</p>
+              </div>
+              <div className="flex absolute end-3 gap-3">
+                <p className="text-green-500">You owe</p>
+                <p className="text-green-500">-$122.00</p>
+                <img className="h-6" src="/icons/edit.png" alt="" />
+              </div>
+            </li>
+            <li className="activity-link relative">
+              <img
+                className="h-8 w-8 p-1 rounded-full bg-slate-400"
+                src="/icons/travel.png"
+                alt=""
+              />
+              <div>
+                <label className="text-sm border border-orange-500 rounded-md px-2 text-orange-500">
+                  Travel
+                </label>
+                <p className="text-sm">Long way to coorg</p>
+              </div>
+              <div className="flex absolute end-3 gap-3">
+                <p className="text-green-500">You owe</p>
+                <p className="text-green-500">-$122.00</p>
+                <img className="h-6" src="/icons/edit.png" alt="" />
+              </div>
+            </li>
+            <li className="activity-link relative">
+              <img
+                className="h-8 w-8 p-1 rounded-full bg-slate-400"
+                src="/icons/travel.png"
+                alt=""
+              />
+              <div>
+                <label className="text-sm border border-orange-500 rounded-md px-2 text-orange-500">
+                  Travel
+                </label>
+                <p className="text-sm">Long way to coorg</p>
+              </div>
+              <div className="flex absolute end-3 gap-3">
+                <p className="text-green-500">You owe</p>
+                <p className="text-green-500">-$122.00</p>
+                <img className="h-6" src="/icons/edit.png" alt="" />
+              </div>
+            </li>
+            
               </ul>
             </div>
-            <div class="card p-4 mt-3 ml-3 overflow-auto inline-block">
+            <div class="card p-4 mt-3 lg:ml-3 overflow-auto inline-block">
                 <h2>Category
                 <a href="" className='text-sm float-end text-blue-700 underline'>See all</a>
                 </h2>

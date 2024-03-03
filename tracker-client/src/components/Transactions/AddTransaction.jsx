@@ -27,18 +27,18 @@ export default function AddTransaction () {
         </li>
         <li class="w-full focus-within:z-10">
           <Link to="/add/income"
-            class={`inline-block w-full p-2 border-r border-gray-700 focus:ring-4 focus:outline-none hover:text-white bg-gray-${path=='/add/income'?"700":"800"} hover:bg-gray-700`}
+            class={`inline-block w-full p-2 border-r border-gray-700 rounded-r-lg focus:ring-4 focus:outline-none hover:text-white bg-gray-${path=='/add/income'?"700":"800"} hover:bg-gray-700`}
           >
             Income
           </Link>
         </li>
-        <li class="w-full focus-within:z-10">
+        {/* <li class="w-full focus-within:z-10">
           <Link to="/add/split"
             class={`inline-block w-full p-2 border-r border-gray-700 rounded-r-lg focus:ring-4 focus:outline-none hover:text-white bg-gray-${path=='/add/split'?"700":"800"} hover:bg-gray-700`}
           >
             Split
           </Link>
-        </li>
+        </li> */}
       </ul>
       <Outlet/>
     </div>

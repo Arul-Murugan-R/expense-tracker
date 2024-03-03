@@ -14,7 +14,7 @@ export default function AddExpense() {
                 <label for="category" class="block mb-1 text-md font-medium">Select an option</label>
                   <select id="category" class="outline-none text-md rounded-lg block w-full p-2.5 bg-gray-700 border border-gray-600 focus:ring-blue-500 focus:border-blue-500">
                     <option selected>On what category do u spent the money</option>
-                    <option value="1">Food & Grocery</option>
+                    <option value="1">Food</option>
                     <option value="2">Entertainment</option>
                     <option value="3">Education</option>
                     <option value="4">Health Care</option>

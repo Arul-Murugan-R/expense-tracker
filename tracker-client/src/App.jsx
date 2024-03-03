@@ -7,14 +7,17 @@ import Login from './components/Login'
 import Otp from './components/Otp'
 import Signup from './components/Signup'
 import SideBar from './components/UI/SideBar'
-import { Routes,Route } from 'react-router-dom'
+import { Routes,Route, useLocation } from 'react-router-dom'
 import AddIncome from './components/Transactions/AddIncome'
 import Today from './components/Today'
+import Budget from './components/Budget'
+import Home from './components/Home'
 
 function App() {
+  const path = useLocation().pathname
   return (
     <>
-    <SideBar/>
+    {path!='/'&& path.indexOf('/auth')==-1&&<SideBar/>}
     <Routes>
       <Route
         path='/auth/login' element={<Login/>}
@@ -33,9 +36,9 @@ function App() {
         }
       />
       <Route
-        path='/addExpense' element={
+        path='/budget' element={
           <div class="p-4 sm:ml-64">
-            <AddExpense/>
+            <Budget/>
           </div>
         }
       />
@@ -74,6 +77,11 @@ function App() {
           <div class="p-4 sm:ml-64">
             <Today/>
           </div>
+        }
+      />
+      <Route
+        path='/' element={
+            <Home/>
         }
       />
       <Route
