@@ -30,8 +30,8 @@ export default function Today() {
                     <label className='text-sm border border-orange-500 rounded-md px-2 text-orange-500'>Travel</label>
                     <p className='text-sm w-40'>Long way to coorg vcdshjgds hgjhg jhfu gf</p>
                   </div>
-                  <p class="text-red-500">You owe</p>
-                  <p class="text-red-500">-$122.00</p>
+                  <p className="text-red-500">You owe</p>
+                  <p className="text-red-500">-$122.00</p>
                 <img className='sm:absolute sm:end-3 h-6' src="/icons/edit.png" alt="" />
                 </li>
                 <li className='activity-link relative'>
@@ -40,8 +40,8 @@ export default function Today() {
                     <label className='text-sm border border-orange-500 rounded-md px-2 text-orange-500'>Travel</label>
                     <p className='text-sm'>Long way to coorg</p>
                   </div>
-                  <p class="text-green-500">You owe</p>
-                  <p class="text-green-500">-$122.00</p>
+                  <p className="text-green-500">You owe</p>
+                  <p className="text-green-500">-$122.00</p>
                 <img className='absolute end-3 h-6' src="/icons/edit.png" alt="" />
                 </li>
                 <li className='activity-link relative'>
@@ -50,8 +50,8 @@ export default function Today() {
                     <label className='text-sm border border-orange-500 rounded-md px-2 text-orange-500'>Travel</label>
                     <p className='text-sm'>Long way to coorg vcdshjgds</p>
                   </div>
-                  <p class="text-red-500">You owe</p>
-                  <p class="text-red-500">-$122.00</p>
+                  <p className="text-red-500">You owe</p>
+                  <p className="text-red-500">-$122.00</p>
                 <img className='h-6' src="/icons/edit.png" alt="" />
                 </li>
                 <li className='activity-link relative'>
@@ -60,8 +60,8 @@ export default function Today() {
                     <label className='text-sm border border-orange-500 rounded-md px-2 text-orange-500'>Travel</label>
                     <p className='text-sm'>Long way to coorg</p>
                   </div>
-                  <p class="text-green-500">You owe</p>
-                  <p class="text-green-500">-$122.00</p>
+                  <p className="text-green-500">You owe</p>
+                  <p className="text-green-500">-$122.00</p>
                 <img className='absolute end-4 h-6' src="/icons/edit.png" alt="" />
                 </li>
           </ul>

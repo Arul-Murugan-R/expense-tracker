@@ -2,36 +2,36 @@ import React from 'react'
 
 export default function AddIncome() {
   return (
-    <div class="p-3 py-3" id="addExpense">
-            <h2 class="text-white text-2xl font-extrabold">Add Income</h2>
-            <form class="text-white mt-5">
-                <div class="mb-6">
-                    <label  class="block mb-1 text-md font-medium ">Purpose</label>
-                    <input type="text" class="outline-none text-md rounded-lg block w-full p-2.5 bg-gray-700 border border-gray-600 focus:ring-blue-500 focus:border-blue-500" placeholder="Reason for the income"/>
-                     {/* <p class="mt-2 text-sm text-green-500"><span class="font-medium">Well done!</span> Some success message.</p>  */}
+    <div className="p-3 py-3" id="addExpense">
+            <h2 className="text-white text-2xl font-extrabold">Add Income</h2>
+            <form className="text-white mt-5">
+                <div className="mb-6">
+                    <label  className="block mb-1 text-md font-medium ">Purpose</label>
+                    <input type="text" className="outline-none text-md rounded-lg block w-full p-2.5 bg-gray-700 border border-gray-600 focus:ring-blue-500 focus:border-blue-500" placeholder="Reason for the income"/>
+                     {/* <p className="mt-2 text-sm text-green-500"><span className="font-medium">Well done!</span> Some success message.</p>  */}
                   </div>
-                <div class="mb-6 inline-block">
-                  <label  class="block mb-1 text-md font-medium">Amount</label>
+                <div className="mb-6 inline-block">
+                  <label  className="block mb-1 text-md font-medium">Amount</label>
                    {/* bg-green-50 border-green-500 text-green-900 text-green-400 placeholder-green-700 placeholder-green-500 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 bg-gray-700 border-green-500  */}
-                  <input type="number" class="outline-none text-md rounded-lg block w-full p-2.5 bg-gray-700 border border-gray-600 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="₹2000"/>
-                   {/* <p class="mt-2 text-sm text-green-500"><span class="font-medium">Well done!</span> Some success message.</p>  */}
+                  <input type="number" className="outline-none text-md rounded-lg block w-full p-2.5 bg-gray-700 border border-gray-600 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="₹2000"/>
+                   {/* <p className="mt-2 text-sm text-green-500"><span className="font-medium">Well done!</span> Some success message.</p>  */}
                 </div>
                 <div className="mb-6 inline-block lg:ml-5">  
-                <label  class="block mb-1 text-md font-medium">Date of Income</label>
-                  <div class="relative max-w-sm">
-                    {/* <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-                      <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <label  className="block mb-1 text-md font-medium">Date of Income</label>
+                  <div className="relative max-w-sm">
+                    {/* <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
                       </svg>
                     </div> */}
-                    <input  type="date" class="bg-gray-50 border outline-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date"/>
+                    <input  type="date" className="bg-gray-50 border outline-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date"/>
                   </div>
                 </div>
                 <div className="mb-6">
-                    <label for="description" class="block mb-1 text-md font-medium text-gray-900 dark:text-white">Add Description</label>
-                    <textarea id="description" rows="4" class="block p-2.5 w-full outline-none text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Add a note for your income"></textarea>
+                    <label for="description" className="block mb-1 text-md font-medium text-gray-900 dark:text-white">Add Description</label>
+                    <textarea id="description" rows="4" className="block p-2.5 w-full outline-none text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Add a note for your income"></textarea>
                 </div>
-                <button class="p-3 rounded-lg bg-transparent border border-yellow-500 text-yellow-400 w-64">Submit</button>
+                <button className="p-3 rounded-lg bg-transparent border border-yellow-500 text-yellow-400 w-64">Submit</button>
 
             </form>
         </div>

@@ -1,24 +1,66 @@
-import React from 'react'
+import React from 'react';
+import {Link} from 'react-router-dom';
 
-export default function Login() {
+export default function Login () {
   return (
-    <form class="max-w-sm mx-auto mt-32">
-      <div class="mb-5">
-        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-        <input type="email" id="email" class="shadow-sm outline-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="user@gmail.com" required />
+    <form className="max-w-sm mx-auto mt-32 text-white">
+      <Link to="/" className="text-md">{`< Home`}</Link>
+      <div className="mb-5">
+        <label for="email" className="block mb-2 text-sm font-medium ">
+          Your email
+        </label>
+        <input
+          type="email"
+          id="email"
+          className="shadow-sm outline-none border text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500 shadow-sm-light"
+          placeholder="user@gmail.com"
+          required
+        />
       </div>
-      <div class="mb-5">
-        <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
-        <div class="relative max-w-sm">
-            <div class="absolute inset-y-1 end-3 flex items-center ps-3.5 cursor-pointer z-1">
-              <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
-              </svg>
-            </div>
-            <input type="password" id="password" class="shadow-sm outline-none z-0 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" required />
+      <div className="mb-5">
+        <label for="password" className="block mb-2 text-sm font-medium ">
+          Your password
+        </label>
+        <div className="relative max-w-sm">
+        <div className="absolute inset-y-0 end-3 flex items-center ps-3.5 cursor-pointer z-1"
+            >
+            <svg
+            onClick={(e)=>{
+              showPass(e)
+          }}
+            id="passwordid" 
+              className="w-6 h-6 text-gray-500"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke="currentColor"
+                stroke-width="2"
+                d="M21 12c0 1.2-4 6-9 6s-9-4.8-9-6c0-1.2 4-6 9-6s9 4.8 9 6Z"
+              />
+              <path
+                stroke="currentColor"
+                stroke-width="2"
+                d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+              />
+            </svg>
+          </div>
+          <input
+            type="password"
+            id="password"
+            className="shadow-sm outline-none z-0 border text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500 shadow-sm-light"
+            required
+          />
         </div>
       </div>
-      <button type="submit" class="text-black bg-yellow-400 hover:bg-yellow-500 focus:ring-2 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">Register new account</button>
+      <button
+        type="submit"
+        className="text-black bg-yellow-400 hover:bg-yellow-500 focus:ring-2 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
+      >
+        Register new account
+      </button>
     </form>
-  )
+  );
 }
