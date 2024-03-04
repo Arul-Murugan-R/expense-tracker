@@ -1,7 +1,11 @@
 import React from 'react'
-import { Link, NavLink, useLocation } from 'react-router-dom'
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { userActions } from '../../store/user'
 
 export default function SideBar() {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
   const path = useLocation().pathname
   return (
     <div>
@@ -14,7 +18,7 @@ export default function SideBar() {
         <aside id="separator-sidebar" className="fixed top-0 left-0 z-40 w-64 h-[100%] transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
         <div className="text-yellow-600 p-2 h-[100%] bg-gray-900">
             <h2 className="text-2xl font-extrabold" >Expense Tracker</h2>
-            <ul className="mt-10">
+            <ul className="mt-5">
                 <li><NavLink to="/dashboard" className="link"><svg className="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
                     <path fill-rule="evenodd" d="M4.9 3C3.9 3 3 3.8 3 4.9V9c0 1 .8 1.9 1.9 1.9H9c1 0 1.9-.8 1.9-1.9V5c0-1-.8-1.9-1.9-1.9H5Zm10 0c-1 0-1.9.8-1.9 1.9V9c0 1 .8 1.9 1.9 1.9H19c1 0 1.9-.8 1.9-1.9V5c0-1-.8-1.9-1.9-1.9h-4Zm-10 10c-1 0-1.9.8-1.9 1.9V19c0 1 .8 1.9 1.9 1.9H9c1 0 1.9-.8 1.9-1.9v-4c0-1-.8-1.9-1.9-1.9H5Zm10 0c-1 0-1.9.8-1.9 1.9V19c0 1 .8 1.9 1.9 1.9H19c1 0 1.9-.8 1.9-1.9v-4c0-1-.8-1.9-1.9-1.9h-4Z" clip-rule="evenodd"/>
                   </svg>
@@ -49,7 +53,12 @@ export default function SideBar() {
                 
             </ul>
             <div className="fixed bottom-10">
-                <button className="button"><svg className="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <button className="button"
+                onClick={()=>{
+                  dispatch(userActions.removeUser())
+                  navigate('/')
+                }}
+                ><svg className="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12H4m12 0-4 4m4-4-4-4m3-4h2a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3h-2"/>
                   </svg>Logout</button>
             </div>
