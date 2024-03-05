@@ -20,14 +20,14 @@ export default function AddTransaction () {
       <ul className="border border-gray-700 text-sm font-medium text-center rounded-lg shadow flex divide-gray-700 text-gray-400 min-w-[400px]">
         <li className="w-full focus-within:z-10">
           <Link to="/add/expense"
-            className={`inline-block w-full p-2 border-r border-gray-700 rounded-s-lg focus:ring-4 active focus:outline-none text-white bg-gray-${path=='/add/expense'?"700":"800"}`}
+            className={`inline-block w-full p-2 border-r border-gray-700 rounded-s-lg focus:ring-4 active focus:outline-none text-white bg-gray-${path=='/add/expense'||path.includes('/add/expense')?"700":"800"}`}
           >
             Expense
           </Link>
         </li>
         <li className="w-full focus-within:z-10">
           <Link to="/add/income"
-            className={`inline-block w-full p-2 border-r border-gray-700 rounded-r-lg focus:ring-4 focus:outline-none hover:text-white bg-gray-${path=='/add/income'?"700":"800"} hover:bg-gray-700`}
+            className={`inline-block w-full p-2 border-r border-gray-700 rounded-r-lg focus:ring-4 focus:outline-none hover:text-white bg-gray-${path=='/add/income'||path.includes('/add/income')?"700":"800"} hover:bg-gray-700`}
           >
             Income
           </Link>

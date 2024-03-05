@@ -1,6 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 
 export default function Home() {
+  const navigate = useNavigate()
+  useEffect(()=>{
+    if(localStorage.getItem('isLoggedIn')){
+      navigate('/dashboard')
+    }
+  },[])
   return (
     <div>
       <section className="w-full px-8 text-gray-700 bg-white">
@@ -15,12 +22,12 @@ export default function Home() {
         </div>
 
         <div className="inline-flex items-center ml-5 space-x-6 lg:justify-end">
-            <a href="/auth/login" className="text-base font-medium leading-6 text-gray-600 whitespace-no-wrap transition duration-150 ease-in-out hover:text-gray-900">
+            <NavLink to="/auth/login" className="text-base font-medium leading-6 text-gray-600 whitespace-no-wrap transition duration-150 ease-in-out hover:text-gray-900">
                 Login
-            </a>
-            <a href="/auth/signup" className="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-white whitespace-no-wrap bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600">
+            </NavLink>
+            <NavLink to="/auth/signup" className="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-white whitespace-no-wrap bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600">
                 Sign up
-            </a>
+            </NavLink>
         </div>
     </div>
 </section>

@@ -3,7 +3,7 @@
 @tailwind utilities;
 @layer components{
     .link{
-        @apply p-2 px-5 rounded-md font-bold text-xl mt-2 cursor-pointer flex gap-2;
+        @apply p-2 px-5 rounded-md font-bold text-lg mt-2 cursor-pointer flex gap-2;
     }
     .link:hover,.link.active{
         @apply bg-gray-700;

@@ -1,8 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {useNavigate} from 'react-router-dom';
+import { useSelector } from 'react-redux'
+import moment from 'moment'
+import { budMod } from '../data/content';
 
 export default function Activities () {
-  const navigate = useNavigate ();
+  const navigate = useNavigate();
+  const [filter,setFilter] = useState({
+    category:'',
+    mode:'',
+    date:''
+  })
+  const transactions = useSelector((state)=>state.transaction)
+  const groupedTransactions = transactions.reduce((groups, transaction) => {
+    const date = transaction.dateOfTransaction;
+    if (!groups[date]) {
+      groups[date] = [];
+    }
+    groups[date].push(transaction);
+    return groups;
+  }, {});
+  const onChangeHandler = (e) =>{
+
+  }
+
   return (
     <div className="lg:flex text-white gap-10">
       <div className="lg:w-[500px] mb-10">
@@ -40,8 +61,14 @@ export default function Activities () {
           <div className="relative max-w-sm">
             <input  type="date" className="bg-gray-50 border outline-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date"/>
         </div>
-
       </div>
+      <button
+            className="button m-0 p-2 px-6 text-sm"
+            // cursor-not-allowed
+            // onClick={() => navigate ('/add/expense')}
+          >
+            Filter
+          </button>
       </div>
       <div className="text-white grid gap-5 w-full h-full">
         <h2 className="text-2xl text-extrabold">Activities</h2>
@@ -54,29 +81,66 @@ export default function Activities () {
             Add Transaction
           </button>
         </div>
-        <div>
-          <h1 className="text-sm text-gray-500">17th Aug 2024</h1>
-          <ul>
-            <li className="activity-link relative">
-              <img
-                className="h-8 w-8 p-1 rounded-full bg-slate-400"
-                src="/icons/travel.png"
-                alt=""
-              />
-              <div>
-                <label className="text-sm border border-orange-500 rounded-md px-2 text-orange-500">
-                  Travel
-                </label>
-                <p className="text-sm">Long way to coorg</p>
-              </div>
-              <div className="flex absolute end-3 gap-3">
-                <p className="text-green-500">You owe</p>
-                <p className="text-green-500">-$122.00</p>
-                <img className="h-6" src="/icons/edit.png" alt="" />
-              </div>
-            </li>
-          </ul>
+        {transactions.length >0 ? Object.keys(groupedTransactions).map((key)=>{
+          return <div key={key}>
+            <h1 className="text-sm text-gray-500">{moment(key).format("Do MMM YYYY")}</h1>
+            <ul>
+              {groupedTransactions[key].map((record,index)=>{
+                if(record.category!="salary"){
+                return(
+                  <li className="activity-link relative" key={index}>
+                <img
+                  className={`h-8 w-8 p-1 rounded-full ${budMod[record.category].background}`}
+                  src={`${budMod[record.category].image}`}
+                  alt=""
+                />
+                <div>
+                  <label className={`"text-sm border ${budMod[record.category].border} rounded-md px-2 ${budMod[record.category].text}`}>
+                    {record.category}
+                  </label>
+                  <p className="text-sm">{record.purpose}</p>
+                </div>
+                <div className="flex absolute end-3 gap-3">
+                  <p className={`text-red-500`}>- ₹{record.amount}</p>
+                  {/* <p className="text-green-500">-$122.00</p> */}
+                  <img 
+                  onClick={()=>navigate('/add/expense/'+record._id)}
+                  className="h-6 cursor-pointer" src="/icons/edit.png" alt="" />
+                </div>
+              </li>
+                )
+                }else{
+                  return <li className="activity-link relative" key={index}>
+                <img
+                  className={`h-8 w-8 p-1 rounded-full bg-green-200`}
+                  src={`/icons/money.png`}
+                  alt=""
+                />
+                <div>
+                  <label className={`"text-sm border border-green-200 rounded-md px-2 text-green-200`}>
+                    {record.category}
+                  </label>
+                  <p className="text-sm">{record.purpose}</p>
+                </div>
+                <div className="flex absolute end-3 gap-3">
+                  <p className={`text-green-500`}>+ ₹{record.amount}</p>
+                  {/* <p className="text-green-500">-$122.00</p> */}
+                  <img 
+                  onClick={()=>navigate('/add/income/'+record._id)}
+                  className="h-6 cursor-pointer" src="/icons/edit.png" alt="" />
+                </div>
+              </li>
+                }
+              })}
+              
+            </ul>
+          </div>
+
+        }):
+        <div className='text-center'>
+          Transaction is Empty
         </div>
+        }
       </div>
 
     </div>

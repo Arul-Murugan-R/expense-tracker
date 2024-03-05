@@ -29,7 +29,7 @@ export default function Budget() {
                   <input type="number" class="outline-none text-md rounded-lg block w-full p-2.5 bg-gray-700 border border-gray-600 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="15%"/>
                    {/* <p class="mt-2 text-sm text-green-500"><span class="font-medium">Well done!</span> Some success message.</p>  */}
         </div>
-        <div className='text-md text-red-500 mb-3'>Note : The sum of percentage of budget list to be less than are equal to 100%</div>
+        <div className='text-md text-red-500 mb-3'>Note : The sum of percentage of budget list to be less than or equal to 100%</div>
         <div>
           <button
             className="button m-0 p-2 text-sm "
@@ -45,7 +45,7 @@ export default function Budget() {
         <div className="text-white grid gap-2 w-full h-full">
         <div className='bg-slate-700 p-3'>
           <h6 className="text-2xl text-bold text-yellow-500">
-            Monthly Income
+            Saving
           </h6>
           <h3 className="text-xl text-bold">
             ₹10000.00
@@ -63,18 +63,18 @@ export default function Budget() {
               <div className="flex absolute end-3 gap-3">
                 <p>Percentage</p>
                 <p>Price</p>
-                <img className="h-6" src="/icons/edit.png" alt="" />
+                {/* <img className="h-6" src="/icons/edit.png" alt="" /> */}
               </div>
             </li>
             {budgetList.map((cat,index)=>{
               return (<li className="activity-link relative">
                   <img
-                    className={`h-8 w-8 p-1 rounded-full bg-${cat.color}-500`}
+                    className={`h-8 w-8 p-1 rounded-full ${cat.background}`}
                     src={cat.image}
                     alt=""
                   />
                   <div>
-                    <label className={`text-sm border border-${cat.color}-500 rounded-md px-2 text-${cat.color}-500`}>
+                    <label className={`text-sm border rounded-md px-2 ${cat.text} ${cat.border}`}>
                       {cat.category}
                     </label>
                   </div>

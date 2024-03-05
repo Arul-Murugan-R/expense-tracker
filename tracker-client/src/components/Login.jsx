@@ -3,6 +3,7 @@ import {Link, useNavigate} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import { userActions } from '../store/user';
 import { transactionAction } from '../store/transaction';
+import { SnackActions } from '../store/SnackStore';
 
 export default function Login () {
   const dispatch = useDispatch()
@@ -25,35 +26,32 @@ const onSubmitHandler = (e) =>{
           "Content-Type": "application/json",
       },
       body: JSON.stringify(loginData)
-  }).then((res) => {
+  }).then(async (res) => {
       console.log(res,'1')
-      if (res.ok ||res.status === 200) {
-          res.json()
-          .then((data) => {
-            console.log(data)
-              dispatch(userActions.setUser({token:data.token,user:data.user}))
-              dispatch(transactionAction.setTransaction({transaction:data.transactions}))
-              setIsLoading(false)
-              setData({})
-              return navigate('/dashboard')
-          })
+      if(!res.ok){
+        const result = await res.json()
+        throw new Error(result.message)
       }
-      return res;
-  }).then((data) => {
-      console.log(data,'2')
-      if (data.message) {
-          setIsLoading(false)
-      }
+      const result = await res.json()
+      console.log(result ,'login')
+      dispatch(transactionAction.setTransaction({transaction:result.transactions}))
+      dispatch(SnackActions.setSnack({title:'Login Status',message:'User Login successfully'}))
+      dispatch(userActions.setUser({token:result.token,user:result.user}))
+      setIsLoading(false)
+      setData({})
+      return navigate('/dashboard')
   }).catch((err) => {
       console.log(err)
+      dispatch(SnackActions.setSnack({title:'Error Occurred',message:err.message}))
       setIsLoading(false)
   })
 }
   return (
     <div className="max-w-sm mx-auto mt-32 text-white">
       <Link to="/" className="text-md">{`< Home`}</Link>
+      <h2 className="text-xl">Login</h2>
       <div className="mb-5">
-        <label for="email" className="block mb-2 text-sm font-medium ">
+        <label htmlFor="email" className="block mb-2 text-sm font-medium ">
           Your email
         </label>
         <input
@@ -68,7 +66,7 @@ const onSubmitHandler = (e) =>{
         />
       </div>
       <div className="mb-5">
-        <label for="password" className="block mb-2 text-sm font-medium ">
+        <label htmlFor="password" className="block mb-2 text-sm font-medium ">
           Your password
         </label>
         <div className="relative max-w-sm">
@@ -120,8 +118,11 @@ const onSubmitHandler = (e) =>{
                   </svg>
                   <span class="sr-only">Loading...</span>
               </div>}
-        Register new account
+        Submit
       </button>
+      <h3 className="text-md text-white text-center pt-2">
+        Want a new account ? <Link to="/auth/signup" className='text-blue-500 underline'>Signup</Link>
+      </h3>
     </div>
   );
 }

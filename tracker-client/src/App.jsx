@@ -7,17 +7,37 @@ import Login from './components/Login'
 import Otp from './components/Otp'
 import Signup from './components/Signup'
 import SideBar from './components/UI/SideBar'
-import { Routes,Route, useLocation } from 'react-router-dom'
+import { Routes,Route, useLocation, useNavigate } from 'react-router-dom'
 import AddIncome from './components/Transactions/AddIncome'
 import Today from './components/Today'
 import Budget from './components/Budget'
 import Home from './components/Home'
+import ProtectedRoute from './ProtectedRoute'
+import { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { userActions, verifyToken } from './store/user'
+import CustomSnack from './components/UI/CustomSnack'
+
+let initial = true
 
 function App() {
+  const dispatch = useDispatch()
   const path = useLocation().pathname
+  useEffect(()=>{
+    if(initial && localStorage.getItem("token"))
+    {
+      dispatch(verifyToken())
+      initial = false
+    }
+  },[])
+  if((path.includes('/auth') || path == '/') && localStorage.getItem("token")){
+    return window.location = '/dashboard'
+  } 
+
   return (
     <>
     {path!='/'&& path.indexOf('/auth')==-1&&<SideBar/>}
+    <CustomSnack/>
     <Routes>
       <Route
         path='/auth/login' element={<Login/>}
@@ -30,27 +50,32 @@ function App() {
       />
       <Route
         path='/dashboard' element={
-          <div class="p-4 sm:ml-64">
+          <ProtectedRoute>
             <Dashboard/>
-          </div>
+          </ProtectedRoute>
         }
       />
       <Route
         path='/budget' element={
-          <div class="p-4 sm:ml-64">
+          <ProtectedRoute>
             <Budget/>
-          </div>
+          </ProtectedRoute>
         }
       />
       <Route
         path='/add' element={
-          <div class="p-4 sm:ml-64">
+          <ProtectedRoute>
             <AddTransaction/>
-          </div>
+          </ProtectedRoute>
         }
       >
         <Route
         path='expense' element={
+            <AddExpense/>
+        }
+        />
+        <Route
+        path='expense/:id' element={
             <AddExpense/>
         }
         />
@@ -60,23 +85,28 @@ function App() {
         }
         />
         <Route
+        path='income/:id' element={
+            <AddIncome/>
+        }
+        />
+        {/* <Route
         path='split' element={
             <AddExpense/>
         }
-        />
+        /> */}
       </Route>
       <Route
         path='/activities' element={
-          <div class="p-4 sm:ml-64">
+          <ProtectedRoute>
             <Activities/>
-          </div>
+          </ProtectedRoute>
         }
       />
       <Route
         path='/today' element={
-          <div class="p-4 sm:ml-64">
+          <ProtectedRoute>
             <Today/>
-          </div>
+          </ProtectedRoute>
         }
       />
       <Route
@@ -86,7 +116,7 @@ function App() {
       />
       <Route
         path="*" element={<center>
-          <h3 class="text-white">Page Not Found</h3>
+          <h3 className="text-white">Page Not Found</h3>
         </center>}
       />
     </Routes>

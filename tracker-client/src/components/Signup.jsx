@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { SnackActions } from "../store/SnackStore";
 
 export default function Signup() {
+  const dispatch = useDispatch()
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [signupData, setData] = useState({
@@ -24,27 +27,22 @@ export default function Signup() {
       },
       body: JSON.stringify(signupData),
     })
-      .then((res) => {
-        console.log(res);
-        if (res.ok || res.status === 200) {
-          res.json().then((data) => {
-            console.log(data);
-            setIsLoading(false);
-            setData({})
-            return navigate("/");
-          });
-        }
-        return res;
-      })
-      .then((data) => {
-        console.log(data);
-        if (data.message) {
-          setIsLoading(false);
-        }
+      .then(async (res) => {
+      if(!res.ok){
+        const result = await res.json()
+        throw new Error(result.message)
+      }
+      const result = await res.json()
+        console.log(result);
+        dispatch(SnackActions.setSnack({title:'Signup Status',message:'User Signup successfully'}))
+        setIsLoading(false);
+        setData({})
+        return navigate("/");
       })
       .catch((err) => {
-        console.log(err);
-        setIsLoading(false);
+        console.log(err)
+        dispatch(SnackActions.setSnack({title:'Error Occurred',message:err.message}))
+        setIsLoading(false)
       });
   };
   const showPass = (e) => {
@@ -65,7 +63,7 @@ export default function Signup() {
       <h2 className="text-white text-xl">Sign Up</h2>
       <div>
         <label
-          for="email"
+          htmlFor="email"
           className="block mb-2 text-sm font-medium text-white"
         >
           Your email
@@ -82,7 +80,7 @@ export default function Signup() {
       </div>
       <div>
         <label
-          for="userName"
+          htmlFor="userName"
           className="block mb-2 text-sm font-medium text-white"
         >
           Username
@@ -99,7 +97,7 @@ export default function Signup() {
       </div>
       {/* <div>
         <label
-          for="saving"
+          htmlFor="saving"
           className="block mb-2 text-sm font-medium text-white"
         >
           Saving
@@ -117,7 +115,7 @@ export default function Signup() {
       </div> */}
       <div>
         <label
-          for="password"
+          htmlFor="password"
           className="block mb-2 text-sm font-medium text-white"
         >
           Your password
@@ -159,7 +157,7 @@ export default function Signup() {
       </div>
       <div>
         <label
-          for="cpassword"
+          htmlFor="cpassword"
           className="block mb-2 text-sm font-medium text-white"
         >
           Repeat password
@@ -213,6 +211,9 @@ export default function Signup() {
               </div>}
         Register new account
       </button>
+      <h3 className="text-md text-white text-center pt-2">
+        Already have a account ? <Link to="/auth/Login" className='text-blue-500 underline'>Login</Link>
+      </h3>
     </div>
   );
 }
