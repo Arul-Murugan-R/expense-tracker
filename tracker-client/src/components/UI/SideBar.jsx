@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { userActions } from "../../store/user";
@@ -7,17 +7,34 @@ import { SnackActions } from "../../store/SnackStore";
 export default function SideBar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [show,setShow] = useState(false)
+  const ref = useRef(null);
+
+  const handleClickOutside = (event) => {
+    if (ref.current && !ref.current.contains(event.target)) {
+      setShow(false)
+    }
+  };
+
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      handleClickOutside(event);
+    };
+
+    document.addEventListener('mousedown', handleOutsideClick);
+
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+    };
+  }, []);
   const path = useLocation().pathname;
   return (
-    <div>
+    <div ref={ref}>
       <button
-        data-drawer-target="separator-sidebar"
-        data-drawer-toggle="separator-sidebar"
-        aria-controls="separator-sidebar"
         type="button"
+        onClick={()=>setShow(true)}
         className="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
       >
-        <span className="sr-only">Open sidebar</span>
         <svg
           className="w-6 h-6"
           aria-hidden="true"
@@ -33,9 +50,7 @@ export default function SideBar() {
         </svg>
       </button>
       <aside
-        id="separator-sidebar"
-        className="fixed top-0 left-0 z-40 w-64 h-[100%] transition-transform -translate-x-full sm:translate-x-0"
-        aria-label="Sidebar"
+        className={`fixed top-0 left-0 z-40 w-64 h-[100%] transition-transform ${!show?"-translate-x-full":"translate-x-0"} sm:translate-x-0`}
       >
         <div className="text-yellow-600 p-2 h-[100%] bg-gray-900">
           <h2 className="text-2xl font-extrabold">Expense Tracker</h2>
