@@ -19,13 +19,26 @@ class User{
         return db.collection('users').insertOne(this);
       }
     
+    static findOne(props){
+      const db = getDb();
+        return db.collection('users')
+        .findOne(props)
+        .then(user=>{
+          // console.log(user)
+          return user;
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+    
       static findById(userId) {
         const db = getDb();
         return db
           .collection('users')
           .findOne({ _id: new ObjectId(userId) })
           .then(user => {
-            console.log(user);
+            // console.log(user);
             return user;
           })
           .catch(err => {

@@ -32,14 +32,14 @@ class Transaction{
           });
       }
     
-      static fetchAll() {
+      static findAll(userId) {
         const db = getDb();
         return db
           .collection('transactions')
-          .find()
+          .find({userId})
           .toArray()
           .then(transactions => {
-            console.log(transactions);
+            // console.log(transactions);
             return transactions;
           })
           .catch(err => {
@@ -47,14 +47,14 @@ class Transaction{
           });
       }
     
-      static findById(prodId) {
+      static findById(userId,prodId) {
         const db = getDb();
         return db
           .collection('transactions')
-          .find({ _id: new mongodb.ObjectId(prodId) })
+          .find({ _id: new mongodb.ObjectId(prodId),userId })
           .next()
           .then(transaction => {
-            console.log(transaction);
+            // console.log(transaction);
             return transaction;
           })
           .catch(err => {
@@ -62,11 +62,11 @@ class Transaction{
           });
       }
     
-      static deleteById(prodId) {
+      static deleteById({userId,prodId}) {
         const db = getDb();
         return db
           .collection('transactions')
-          .deleteOne({ _id: new mongodb.ObjectId(prodId) })
+          .deleteOne({ _id: new mongodb.ObjectId(prodId),userId })
           .then(result => {
             console.log('Deleted');
           })
