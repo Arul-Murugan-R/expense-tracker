@@ -20,8 +20,7 @@ const userSlice = createSlice({
     },
     setUser(state, action) {
       const { token, user } = action.payload;
-      console.log(action.payload, "redux");
-      localStorage.setItem("userId", user.userId);
+      localStorage.setItem("userId", user._id);
       localStorage.setItem("token", token);
       localStorage.setItem("isLoggedIn", true);
       state = user;
@@ -47,7 +46,6 @@ export const verifyToken = () => {
     const verifier = async () => {
       try{
       const token = localStorage.getItem("token");
-      console.log(token)
       const response = await fetch(import.meta.env.VITE_BACKEND + "/auth/verify", {
           method: "POST",
           headers: {
@@ -59,10 +57,11 @@ export const verifyToken = () => {
         throw new Error(response.message)
       }
       const result = await response.json()
-      dispatch(userActions.setUser({token,user:result.user}));
-      dispatch(transactionAction.setTransaction({transaction:result.transactions}))
+      await dispatch(transactionAction.setTransaction({transaction:result.transactions}))
+      await dispatch(userActions.setUser({token,user:result.user}));
     }
     catch (error) {
+      console.log(error)
         localStorage.removeItem("token");
         localStorage.removeItem("userId");
         localStorage.removeItem("isLoggedIn")
@@ -71,7 +70,5 @@ export const verifyToken = () => {
     };
 
     const verificationResult = await verifier();
-    // console.log(verificationResult)
-    // dispatch(userActions.setUser({ ...verificationResult }));
   };
 };
