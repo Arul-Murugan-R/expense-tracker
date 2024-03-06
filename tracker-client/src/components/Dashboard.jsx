@@ -22,7 +22,7 @@ export default function Dashboard() {
         const transactionDate = new Date(transaction.dateOfTransaction);
         const amount = parseInt(transaction.amount)
         const category = transaction.category
-        console.log(transactionDate.getMonth())
+        //console.log(transactionDate.getMonth())
         if(transactionDate.getFullYear() === year && transactionDate.getMonth() === month){
           if(category != "salary"){
             expense +=amount
@@ -32,7 +32,7 @@ export default function Dashboard() {
         }
       });
       groups["expense"] = expense
-      console.log(groups,'djjd')
+      //console.log(groups,'djjd')
       setSpent(groups)
       };
   useEffect(()=>{

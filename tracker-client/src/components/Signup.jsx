@@ -33,21 +33,21 @@ export default function Signup() {
         throw new Error(result.message)
       }
       const result = await res.json()
-        console.log(result);
+        //console.log(result);
         dispatch(SnackActions.setSnack({title:'Signup Status',message:'User Signup successfully'}))
         setIsLoading(false);
         setData({})
         return navigate("/");
       })
       .catch((err) => {
-        console.log(err)
+        //console.log(err)
         dispatch(SnackActions.setSnack({title:'Error Occurred',message:err.message}))
         setIsLoading(false)
       });
   };
   const showPass = (e) => {
     const pass = document.getElementById(e.target.id.split("id")[0]);
-    console.log(pass);
+    //console.log(pass);
     if (pass.type == "password") {
       pass.type = "text";
     } else {

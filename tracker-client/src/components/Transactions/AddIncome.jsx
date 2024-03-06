@@ -19,7 +19,7 @@ export default function AddIncome() {
   const { id } = useParams();
   const [isLoading, setIsLoading] = useState(false);
   let transaction = useSelector((state) => state.transaction).find((rec)=>rec._id==id)
-  // console.log(transaction,'gdg')
+  // //console.log(transaction,'gdg')
   const [incomeData, setData] = useState(initialState);
   useEffect(()=>{
     if(id)
@@ -44,13 +44,13 @@ export default function AddIncome() {
       },
       body: JSON.stringify({...incomeData,id})
   }).then(async (res) => {
-      console.log(res)
+      //console.log(res)
       if(!res.ok){
         const result = await res.json()
         throw new Error(result.message)
       }
       const data = await res.json();
-      console.log(data,'1');
+      //console.log(data,'1');
       if(!id)
       {
         dispatch(transactionAction.addTransaction({transaction:data.transaction}))
@@ -65,7 +65,7 @@ export default function AddIncome() {
       setIsLoading(false);
       setData(initialState);
   }).catch((err) => {
-      console.log(err)
+      //console.log(err)
       dispatch(SnackActions.setSnack({title:'Error Occurred',message:err.message}))
       setIsLoading(false)
   })
@@ -81,19 +81,19 @@ export default function AddIncome() {
         },
         body: JSON.stringify({id})
     }).then(async (res) => {
-      console.log(res)
+      //console.log(res)
       if(!res.ok){
         throw new Error("something went wrong")
       }
         const data = await res.json();
-        console.log(data, '1');
+        //console.log(data, '1');
         dispatch(transactionAction.deleteTransaction({id}))
         dispatch(SnackActions.setSnack({ title: 'Income Status', message: 'Removed from the list!!' }));
         setData(initialState);
         navigate('/activities')
         setIsLoading(false);
     }).catch((err) => {
-        console.log(err,'3')
+        //console.log(err,'3')
         setIsLoading(false)
     })
   

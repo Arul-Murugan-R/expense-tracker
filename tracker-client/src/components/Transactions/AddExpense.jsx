@@ -42,13 +42,13 @@ const onSubmitHandler = async (e) =>{
       },
       body: JSON.stringify({...expenseData,id})
   }).then(async (res) => {
-      console.log(res)
+      // console.log(res)
       if(!res.ok){
         const result = await res.json()
         throw new Error(result.message)
       }
       const data = await res.json();
-      console.log(data,'1');
+      // console.log(data,'1');
       if(!id)
       {
         dispatch(transactionAction.addTransaction({transaction:data.transaction}))
@@ -63,7 +63,7 @@ const onSubmitHandler = async (e) =>{
       setIsLoading(false);
       setData(initialState);
   }).catch((err) => {
-      console.log(err)
+      // console.log(err)
       dispatch(SnackActions.setSnack({title:'Error Occurred',message:err.message}))
       setIsLoading(false)
   })
@@ -79,19 +79,19 @@ const onRemoveHandler = (e) =>{
       },
       body: JSON.stringify({id})
   }).then(async (res) => {
-    console.log(res)
+    // console.log(res)
     if(!res.ok){
       throw new Error("something went wrong")
     }
       const data = await res.json();
-      console.log(data, '1');
+      // console.log(data, '1');
       dispatch(transactionAction.deleteTransaction({id}))
       navigate('/activities')
       dispatch(SnackActions.setSnack({ title: 'Expense Status', message: 'Removed from the list!!' }));
       setData(initialState);
       setIsLoading(false);
   }).catch((err) => {
-      console.log(err,'3')
+      // console.log(err,'3')
       setIsLoading(false)
   })
 

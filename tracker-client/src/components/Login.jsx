@@ -19,7 +19,7 @@ export default function Login () {
 }
 const showPass = (e) => {
   const pass = document.getElementById(e.target.id.split("id")[0]);
-  console.log(pass);
+  //console.log(pass);
   if (pass.type == "password") {
     pass.type = "text";
   } else {
@@ -36,13 +36,13 @@ const onSubmitHandler = (e) =>{
       },
       body: JSON.stringify(loginData)
   }).then(async (res) => {
-      console.log(res,'1')
+      //console.log(res,'1')
       if(!res.ok){
         const result = await res.json()
         throw new Error(result.message)
       }
       const result = await res.json()
-      console.log(result ,'login')
+      //console.log(result ,'login')
       dispatch(transactionAction.setTransaction({transaction:result.transactions}))
       dispatch(SnackActions.setSnack({title:'Login Status',message:'User Login successfully'}))
       dispatch(userActions.setUser({token:result.token,user:result.user}))
@@ -50,7 +50,7 @@ const onSubmitHandler = (e) =>{
       setData({})
       return navigate('/dashboard')
   }).catch((err) => {
-      console.log(err)
+      //console.log(err)
       dispatch(SnackActions.setSnack({title:'Error Occurred',message:err.message}))
       setIsLoading(false)
   })
