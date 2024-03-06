@@ -46,8 +46,6 @@ export default function Signup() {
       });
   };
   const showPass = (e) => {
-    console.log(e.target.id);
-    console.log(e.target.id.split("id")[0]);
     const pass = document.getElementById(e.target.id.split("id")[0]);
     console.log(pass);
     if (pass.type == "password") {
@@ -58,7 +56,7 @@ export default function Signup() {
   };
 
   return (
-    <div className="max-w-sm mx-auto mt-8 grid gap-2 text-white">
+    <div className="max-w-sm mx-auto mt-8 grid gap-2 text-white sm:p-0 px-2">
       <Link to="/" className="text-md">{`< Home`}</Link>
       <h2 className="text-white text-xl">Sign Up</h2>
       <div>
@@ -73,6 +71,7 @@ export default function Signup() {
           name="email"
           onChange={(e)=>{onChangeHandler(e)}}
           id="email"
+          autoComplete={false}
           className="shadow-sm outline-none border text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500 shadow-sm-light"
           placeholder="user@gmail.com"
           required

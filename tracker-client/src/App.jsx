@@ -22,17 +22,28 @@ let initial = true
 
 function App() {
   const dispatch = useDispatch()
+  const [loading,setIsLoading] = useState(true)
   const path = useLocation().pathname
-  useEffect(()=>{
-    if(initial && localStorage.getItem("token"))
-    {
-      dispatch(verifyToken())
+  const fetchData = async()=>{
+      await dispatch(verifyToken())
       initial = false
-    }
+      setIsLoading(false)
+  }
+  useEffect(()=>{
+    if(localStorage.getItem('token'))
+      fetchData()
+    else
+    setIsLoading(false)
   },[])
   if((path.includes('/auth') || path == '/') && localStorage.getItem("token")){
     return window.location = '/dashboard'
   } 
+  if(loading){
+    return <h1 className="text-white text-center text-xl">
+      Loading...
+    </h1>
+  }
+
 
   return (
     <>

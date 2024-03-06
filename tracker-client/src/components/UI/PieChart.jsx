@@ -12,7 +12,7 @@ export function PieChart(props) {
 
   for (let i of budgetList) {
     label.push(i.category);
-    per.push(props.budget[i.category.toLowerCase()=='healthcare'?'healthCare':i.category.toLowerCase()]);
+    per.push(props.budget[i.category.toLowerCase()]);
     color.push(i.color);
   }
 

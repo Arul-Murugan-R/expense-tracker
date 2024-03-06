@@ -52,7 +52,15 @@ route.post('/add-expense',status,[
     //     })
     // })
     ,
-    body('dateOfTransaction').not().isEmpty().withMessage('Requires Date of Expense'),
+    body('dateOfTransaction').not().isEmpty().withMessage('Requires Date of Expense')
+    // .custom((val,{req})=>{
+    //     console.log(val)
+    //     if(new Date(val) > new Date()){
+    //         return Promise.reject('The transaction for future cannot be recorded')
+    //     }
+    //     return
+    // })
+    ,
 
     
 ],async (req,res,next)=>{
@@ -98,7 +106,14 @@ route.post('/add-income',status,[
     //     })
     // })
     ,
-    body('dateOfTransaction').not().isEmpty().withMessage('Requires Date of Income'),
+    body('dateOfTransaction').not().isEmpty().withMessage('Requires Date of Income')
+    // .custom((val,{req})=>{
+    //     console.log(val)
+    //     if(new Date(val) > new Date()){
+    //         return Promise.reject('The transaction for future cannot be recorded')
+    //     }
+    // })
+    ,
 ],async (req,res,next)=>{
     try{
         const errors = validationResult(req)

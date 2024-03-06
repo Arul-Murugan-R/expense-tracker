@@ -1,8 +1,26 @@
-import React from 'react'
-import { budgetList } from '../data/content'
+import React, { useEffect, useState } from 'react'
+import { budgetList, initialSav } from '../data/content'
+import {useSelector} from 'react-redux'
 
 export default function Budget() {
-  
+  const user = useSelector((state)=>state.user)
+  const [income,setIncome] = useState(0)
+  let transactions = useSelector((state)=>state.transaction)
+  const filterTransactionsByMonth = (transactions, year = new Date().getFullYear(), month = new Date().getMonth()) => {
+    let amount = 0 
+    transactions.filter(transaction => {
+      const transactionDate = new Date(transaction.dateOfTransaction);
+      if(transactionDate.getFullYear() === year && transactionDate.getMonth() === month && transaction.category == "salary"){
+          amount += parseInt(transaction.amount)
+      }
+    });
+    // console.log(amount)
+    setIncome(amount)
+    };
+ useEffect(()=>{
+  if(transactions!=[])
+   filterTransactionsByMonth(transactions)
+ },[transactions])
 
   return (
     <div className="lg:flex text-white gap-10">
@@ -48,7 +66,7 @@ export default function Budget() {
             Saving
           </h6>
           <h3 className="text-xl text-bold">
-            ₹10000.00
+            ₹{income || 10000.00}
           </h3>
         </div>
         <h2 className="text-2xl text-extrabold">Budget on income</h2>
@@ -67,7 +85,7 @@ export default function Budget() {
               </div>
             </li>
             {budgetList.map((cat,index)=>{
-              return (<li className="activity-link relative">
+              return (<li className="activity-link relative" key={index}>
                   <img
                     className={`h-8 w-8 p-1 rounded-full ${cat.background}`}
                     src={cat.image}
@@ -79,8 +97,8 @@ export default function Budget() {
                     </label>
                   </div>
                   <div className="flex absolute end-3 gap-3">
-                    <p>{cat.percentage}%</p>
-                    <p>₹{cat.price}</p>
+                    <p>{user.budget[cat.category.toLowerCase()]}%</p>
+                    <p>₹{(user.budget[cat.category.toLowerCase()] / 100)*income}</p>
                     <img className="h-6" src="/icons/edit.png" alt="" />
                   </div>
                 </li>)

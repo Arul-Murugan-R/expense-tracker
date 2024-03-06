@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { transactionAction } from "./transaction";
+import { SnackActions } from "./SnackStore";
 
 const initialState = {
   name: null,
@@ -61,11 +62,8 @@ export const verifyToken = () => {
       await dispatch(userActions.setUser({token,user:result.user}));
     }
     catch (error) {
-      console.log(error)
-        localStorage.removeItem("token");
-        localStorage.removeItem("userId");
-        localStorage.removeItem("isLoggedIn")
-        return initialState;
+        console.log(error.message)
+        await dispatch(SnackActions.setSnack({title:'store',message:error.message}))
     }
     };
 

@@ -5,13 +5,13 @@ const ObjectId = mongodb.ObjectId;
 
 class User{
     constructor(name,email,password,savings,budget,monthlyIncome,id){
+        this._id = id;
         this.name = name
         this.email = email
         this.password = password
         this.savings = savings
         this.budget = budget
         this.monthlyIncome = monthlyIncome
-        this._id = id;
     }
 
     save() {

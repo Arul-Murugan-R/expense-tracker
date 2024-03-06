@@ -2,20 +2,12 @@ import React, { useEffect, useState } from "react";
 import "./dashboard.css";
 import { Link, useNavigate } from "react-router-dom";
 import { PieChart } from "./UI/PieChart";
-import { budgetList } from "../data/content";
+import { budgetList, initialSav, sort, sortSpent } from "../data/content";
 import { useSelector } from "react-redux";
-import { budMod } from "../data/content";
+import { budMod,sortTransactionsByDate } from "../data/content";
 import CustomSnack from "./UI/CustomSnack";
 
-let initialSav = {
-  travel:0,
-  education:0,
-  entertainment:0,
-  healthCare:0,
-  food:0,
-  shopping:0,
-  others:0,
-}
+
 
 export default function Dashboard() {
   const navigate = useNavigate()
@@ -23,30 +15,29 @@ export default function Dashboard() {
   const user = useSelector((state) => state.user);
   const [spent,setSpent] = useState(initialSav)
   let transactions = useSelector((state) => state.transaction);
-  const stats = async ()=>{
-    const groupedTransactions = await transactions.reduce((groups, transaction) => {
-      const category = transaction.category;
-      const amount = parseInt(transaction.amount)
-      if (!groups[category]) {
-        groups[category] = 0 + amount;
-      }
-      else
-      groups[category] += amount;
-      return groups;
-    }, {});
-    setSpent(groupedTransactions)
-  }
+  const filterTransactionsByMonth =async  (transactions, year = new Date().getFullYear(), month = new Date().getMonth()) => { 
+    let expense = 0
+    let groups = {...initialSav}
+     await transactions.filter(transaction => {
+        const transactionDate = new Date(transaction.dateOfTransaction);
+        const amount = parseInt(transaction.amount)
+        const category = transaction.category
+        console.log(transactionDate.getMonth())
+        if(transactionDate.getFullYear() === year && transactionDate.getMonth() === month){
+          if(category != "salary"){
+            expense +=amount
+          }
+          groups[category] += amount;
+          return transaction
+        }
+      });
+      groups["expense"] = expense
+      console.log(groups,'djjd')
+      setSpent(groups)
+      };
   useEffect(()=>{
-    if(transactions.length > 0)
-    stats()
-    else
-    setSpent(initialSav)
-  },[transactions])
-  if(loading){
-    return <h1 className="text-white text-center text-xl">
-      Loading...
-    </h1>
-  }
+    filterTransactionsByMonth(transactions)
+  },[])
 
   return (
     <div className="p-1" id="Dashboard">
@@ -74,42 +65,17 @@ export default function Dashboard() {
       </h2>
       <h2 className="text-white text-2xl font-extrabold">Amount Spent</h2>
       <div className="cards grid grid-cols-2 gap-5 lg:grid-cols-4">
-        <div className="card">
-          <span>
-            <img src="/icons/party.png" alt="" />
+        {Object.keys(sortSpent(spent)).map((key,index)=>{
+          return (<div className="card" key={index}>
+          <span >
+            <img className={`${budMod[key].background}`} src={`/icons/${key}.png`} alt="" />
           </span>
           <h3>
-            ₹ 450/<small>1000</small>
+            ₹ {sortSpent(spent)[key]}/<small>{(user.budget[key] / 100)*spent.salary}</small>
           </h3>
-          <p>Entertainment</p>
-        </div>
-        <div className="card">
-          <span>
-            <img src="/icons/food.png" alt="" />
-          </span>
-          <h3>
-            ₹ 300/<small>1500</small>
-          </h3>
-          <p>Food</p>
-        </div>
-        <div className="card">
-          <span>
-            <img src="/icons/travel.png" alt="" />
-          </span>
-          <h3>
-            ₹ 1000/<small>2500</small>
-          </h3>
-          <p>Travel</p>
-        </div>
-        <div className="card">
-          <span>
-            <img src="/icons/education.png" alt="" />
-          </span>
-          <h3>
-            ₹ 1200/<small>5500</small>
-          </h3>
-          <p>Education</p>
-        </div>
+          <p>{key[0].toUpperCase() + key.slice(1)}</p>
+        </div>)
+        })}
       </div>
       <div className="grid lg:grid-cols-2 grid-cols-1">
         <div className="card p-3 mt-3 overflow-auto inline-block lg:max-h-[360px]">
@@ -123,7 +89,7 @@ export default function Dashboard() {
             </Link>
           </h2>
           <ul>
-            {transactions.length >0 ? transactions?.slice(0, 4).map((record, index) => {
+            {transactions.length >0 ? sortTransactionsByDate(transactions,"DEC")?.slice(0, 4).map((record, index) => {
               if (record.category != "salary") {
                 return (
                   <li className="activity-link relative" key={index}>
@@ -135,8 +101,9 @@ export default function Dashboard() {
                       alt=""
                     />
                     <div>
+                      
                       <label
-                        className={`"text-sm border ${
+                        className={`text-sm border ${
                           budMod[record.category].border
                         } rounded-md px-2 ${budMod[record.category].text}`}
                       >

@@ -17,6 +17,15 @@ export default function Login () {
     const { name, value } = e.target
     setData({ ...loginData, [name]: value })
 }
+const showPass = (e) => {
+  const pass = document.getElementById(e.target.id.split("id")[0]);
+  console.log(pass);
+  if (pass.type == "password") {
+    pass.type = "text";
+  } else {
+    pass.type = "password";
+  }
+};
 const onSubmitHandler = (e) =>{
   e.preventDefault()
   setIsLoading(true)
@@ -47,10 +56,10 @@ const onSubmitHandler = (e) =>{
   })
 }
   return (
-    <div className="max-w-sm mx-auto mt-32 text-white">
+    <div className="max-w-sm mx-auto mt-24 text-white sm:p-0 px-2 grid gap-3">
       <Link to="/" className="text-md">{`< Home`}</Link>
       <h2 className="text-xl">Login</h2>
-      <div className="mb-5">
+      <div>
         <label htmlFor="email" className="block mb-2 text-sm font-medium ">
           Your email
         </label>
@@ -65,7 +74,7 @@ const onSubmitHandler = (e) =>{
           required
         />
       </div>
-      <div className="mb-5">
+      <div>
         <label htmlFor="password" className="block mb-2 text-sm font-medium ">
           Your password
         </label>
@@ -73,10 +82,10 @@ const onSubmitHandler = (e) =>{
         <div className="absolute inset-y-0 end-3 flex items-center ps-3.5 cursor-pointer z-1"
             >
             <svg
-            onClick={(e)=>{
-              showPass(e)
-          }}
-            id="passwordid" 
+              onClick={(e) => {
+                showPass(e);
+              }}
+              id="passwordid"
               className="w-6 h-6 text-gray-500"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"

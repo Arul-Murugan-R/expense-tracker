@@ -29,8 +29,8 @@ export default function AddIncome() {
     e.preventDefault();
     const { name, value } = e.target;
     setData({
-      ...incomeData,[name]: value 
-      // [name]: e.target.attributes[0].value === "number" ? +value : value,
+      ...incomeData,
+      [name]: e.target.attributes[0].value === "number" ? +value : value,
     });
   };
   const onSubmitHandler = async (e) =>{

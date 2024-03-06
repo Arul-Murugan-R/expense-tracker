@@ -19,15 +19,17 @@ export default function AddExpense() {
   const navigate = useNavigate()
   const {id} = useParams()
   const [isLoading,setIsLoading] = useState(false)
-  const transaction = useSelector((state)=>state.transaction)
+  const transaction = useSelector((state)=>state.transaction).find((rec)=>rec._id==id)
   const [expenseData,setData] = useState(initialState)
   useEffect(()=>{
     if(id)
-    setData(transaction.find((rec)=>rec._id==id))
+    setData(transaction)
   },[id])
   const onChangeHandler = (e) => {
     const { name, value } = e.target
-    setData({ ...expenseData, [name]: value })
+    setData({ ...expenseData, 
+      [name]: e.target.attributes[0].value === "number" ? +value : value,
+    })
 }
 const onSubmitHandler = async (e) =>{
     e.preventDefault()

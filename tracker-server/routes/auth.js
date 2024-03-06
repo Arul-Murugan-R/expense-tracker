@@ -27,7 +27,7 @@ route.post('/verify',async (req, res, next) => {
             transactions
 		});
 	} catch (error) {
-		res.status(401).json({
+		return res.status(401).json({
 			message: "Unauthorized user",
 			error: error,
 		});
@@ -142,7 +142,7 @@ route.post('/signup',
                 travel : 15,
                 education:15,
                 entertainment:15,
-                healthCare:15,
+                health:15,
                 food:15,
                 shopping:15,
                 others:10,

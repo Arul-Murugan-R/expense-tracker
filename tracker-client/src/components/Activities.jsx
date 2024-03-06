@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {useNavigate} from 'react-router-dom';
 import { useSelector } from 'react-redux'
 import moment from 'moment'
-import { budMod } from '../data/content';
+import { budMod, sortTransactionsByDate } from '../data/content';
 
 export default function Activities () {
   const navigate = useNavigate();
@@ -11,8 +11,8 @@ export default function Activities () {
     mode:'',
     date:''
   })
-  const transactions = useSelector((state)=>state.transaction)
-  const groupedTransactions = transactions.reduce((groups, transaction) => {
+  let transactions = useSelector((state)=>state.transaction)
+  const groupedTransactions = sortTransactionsByDate(transactions,"DEC").reduce((groups, transaction) => {
     const date = transaction.dateOfTransaction;
     if (!groups[date]) {
       groups[date] = [];
@@ -20,9 +20,6 @@ export default function Activities () {
     groups[date].push(transaction);
     return groups;
   }, {});
-  const onChangeHandler = (e) =>{
-
-  }
 
   return (
     <div className="lg:flex text-white gap-10">

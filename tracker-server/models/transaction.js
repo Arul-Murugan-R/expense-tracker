@@ -3,11 +3,11 @@ const getDb = require('../util/database').getDb;
 
 class Transaction{
     constructor(purpose,category,dateOfTransaction,amount,description,id, userId){
+        this._id = id ? new mongodb.ObjectId(id) : null;
         this.purpose = purpose
         this.category = category
         this.dateOfTransaction = dateOfTransaction
         this.amount = amount
-        this._id = id ? new mongodb.ObjectId(id) : null;
         this.description = description
         this.userId = userId;
     }
