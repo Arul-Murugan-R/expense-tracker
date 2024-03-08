@@ -105,7 +105,7 @@ export default function AddIncome() {
             </h1> */}
       <h2 className="text-white text-2xl font-extrabold">Add Income</h2>
       <div className="text-white mt-5">
-        <div className="mb-6">
+        <div className="mb-4 sm:mb-6">
           <label className="block mb-1 text-md font-medium ">Purpose <label className="text-extrabold text-lg text-red-600">*</label></label>
           <input
             type="text"
@@ -119,7 +119,7 @@ export default function AddIncome() {
           />
           {/* <p className="mt-2 text-sm text-green-500"><span className="font-medium">Well done!</span> Some success message.</p>  */}
         </div>
-        <div className="mb-6 inline-block">
+        <div className="mb-4 sm:mb-6 inline-block w-full sm:w-44">
           <label className="block mb-1 text-md font-medium">Amount <label className="text-extrabold text-lg text-red-600">*</label></label>
           {/* bg-green-50 border-green-500 text-green-900 text-green-400 placeholder-green-700 placeholder-green-500 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 bg-gray-700 border-green-500  */}
           <input
@@ -134,7 +134,7 @@ export default function AddIncome() {
           />
           {/* <p className="mt-2 text-sm text-green-500"><span className="font-medium">Well done!</span> Some success message.</p>  */}
         </div>
-        <div className="mb-6 inline-block lg:ml-5">
+        <div className="mb-4 sm:mb-6 inline-block w-full sm:w-64 md:ml-5">
           <label className="block mb-1 text-md font-medium">
             Date of Income <label className="text-extrabold text-lg text-red-600">*</label>
           </label>
@@ -151,7 +151,7 @@ export default function AddIncome() {
             />
           </div>
         </div>
-        <div className="mb-6">
+        <div className="mb-4 sm:mb-6">
           <label
             htmlFor="description"
             className="block mb-1 text-md font-medium text-gray-900 dark:text-white"

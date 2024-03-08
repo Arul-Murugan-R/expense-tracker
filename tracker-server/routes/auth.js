@@ -103,6 +103,7 @@ route.use('/login',(req, res,next)=>{
 
 route.post('/signup',
 [
+    body('name').not().isEmpty().withMessage('Requires Name'),
     body('email').not().isEmpty().withMessage('Requires Email').custom((val,{req})=>{
         return User.findOne({email:val})
         .then((result)=>{
@@ -112,7 +113,6 @@ route.post('/signup',
             }
         })
     }),
-    body('name').not().isEmpty().withMessage('Requires Name'),
     body('password').not().isEmpty().withMessage('Password is Empty'),
     body('cpassword').not().isEmpty().withMessage('Confirm Password is Empty')
     
@@ -133,7 +133,7 @@ route.post('/signup',
             throw error
         }
         bcrypt.hash(req.body.password,12)
-        .then((hash)=>{
+        .then(async (hash)=>{
             const name = req.body.name
             const email = req.body.email
             const password = hash
@@ -149,11 +149,23 @@ route.post('/signup',
             }
             const monthlyIncome = 0
             const user = new User(name,email,password,savings,budget,monthlyIncome)
-        user.save()
-        // })
-        .then((result)=>{
-            res.status(201).json({message:'User Signed Up Successfully',userId:result._id})
-        })
+            await user.save()
+            .then((result)=>{
+                console.log(result)
+                const userData = {
+                    _id:result.insertedId.toString(),
+                    name:name,
+                    email:email,
+                    savings:savings,
+                    monthlyIncome:monthlyIncome,
+                    budget:budget
+                }
+                const token = jwt.sign({
+                    user:userData,
+                    _id:result.insertedId.toString(),
+                },process.env.SECRET,{expiresIn:'7d'})
+                res.status(200).json({message:'Signed Up Successfully',token:token,user:userData,transactions:[]})
+            })
     })
     .catch(err=>{
         console.log(err)

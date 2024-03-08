@@ -6,7 +6,7 @@ export default function AddTransaction () {
     const path = useLocation().pathname
   return (
     <div>
-      {/* <div className="sm:hidden">
+      <div className="hidden">
         <label for="tabs" className="sr-only">Select the type of transaction</label>
         <select
           id="tabs"
@@ -16,8 +16,8 @@ export default function AddTransaction () {
           <option>Income</option>
           <option>Split</option>
         </select>
-      </div> */}
-      <ul className="border border-gray-700 text-sm font-medium text-center rounded-lg shadow flex divide-gray-700 text-gray-400 min-w-[400px]">
+      </div>
+      <ul className="border border-gray-700 text-sm font-medium text-center rounded-lg shadow flex divide-gray-700 text-gray-400 md:min-w-[400px]">
         <li className="w-full focus-within:z-10">
           <Link to="/add/expense"
             className={`inline-block w-full p-2 border-r border-gray-700 rounded-s-lg focus:ring-4 active focus:outline-none text-white bg-gray-${path=='/add/expense'||path.includes('/add/expense')?"700":"800"}`}

@@ -1,18 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { SnackActions } from "../../store/SnackStore";
 
 export default function CustomSnack() {
   const snack = useSelector((state) => state.snack);
+  // const [sec,setSec] = useState(0)
   const dispatch = useDispatch()
+
+  if(snack.open){
+    // setSec(0)
+    // const interval = setInterval(async()=>{
+    //   setSec((prev)=>prev+1)
+    // },5000)
+		setTimeout(async () => {
+      // console.log("hello")
+      dispatch(SnackActions.closeSnack())
+      // console.log(sec)
+		}, 2000);
+  }
   
   if(snack.open)
   return (
     <div
       id="default-modal"
-      className="overflow-y-auto overflow-x-hidden fixed top-96 left-0 z-50 justify-center items-center w-full h-[calc(100%-1rem)] max-h-full"
+      className="overflow-y-auto overflow-x-hidden fixed top-[70%] left-0 z-50 justify-center items-center w-full h-[calc(100%-1rem)] max-h-full"
     >
-      <div className="relative p-4 w-full max-w-2xl max-h-full">
+      <div className="relative p-2 w-full max-w-lg max-h-full">
         {/* <!-- Modal content --> */}
         <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
           {/* <!-- Modal header --> */}
@@ -35,9 +48,9 @@ export default function CustomSnack() {
               >
                 <path
                   stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
                 />
               </svg>

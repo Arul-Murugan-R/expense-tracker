@@ -103,15 +103,15 @@ const onRemoveHandler = (e) =>{
             </h1> */}
             <h2 className="text-white text-2xl font-extrabold">Add Expense</h2>
             <div className="text-white mt-5" >
-                <div className="mb-6">
+                <div className="mb-4 sm:mb-6">
                     <label  className="block mb-1 text-md font-medium ">Purpose <label className="text-extrabold text-lg text-red-600">*</label></label>
                     <input type="text" autoComplete='off' name="purpose" onChange={(e)=>{onChangeHandler(e)}} value={expenseData.purpose} className="outline-none text-md rounded-lg block w-full p-2.5 bg-gray-700 border border-gray-600 focus:ring-blue-500 focus:border-blue-500" placeholder="Reason for the expense"/>
                      {/* <p className="mt-2 text-sm text-green-500"><span className="font-medium">Well done!</span> Some success message.</p>  */}
                   </div>
-                <div className="mb-6 inline-block">
+                <div className="mb-4 sm:mb-6 inline-block lg:w-96 w-full">
                 <label htmlFor="category" className="block mb-1 text-md font-medium">Select an Category <label className="text-extrabold text-lg text-red-600">*</label></label>
-                  <select id="category" name="category" onChange={(e)=>{onChangeHandler(e)}} value={expenseData.category} className="outline-none text-md rounded-lg block w-full p-2.5 bg-gray-700 border border-gray-600 focus:ring-blue-500 focus:border-blue-500">
-                    <option selected value="">On what category do u spent the money</option>
+                  <select id="category" name="category" onChange={(e)=>{onChangeHandler(e)}} value={expenseData.category} className="w-full outline-none text-md rounded-lg block p-2.5 bg-gray-700 border border-gray-600 focus:ring-blue-500 focus:border-blue-500">
+                    <option selected value="">Select</option>
                     <option value="food">Food</option>
                     <option value="entertainment">Entertainment</option>
                     <option value="education">Education</option>
@@ -121,19 +121,19 @@ const onRemoveHandler = (e) =>{
                     <option value="others">Others</option>
                   </select>
                 </div>
-                <div className="mb-6 inline-block lg:ml-5">
+                <div className="mb-4 sm:mb-6 inline-block lg:w-auto w-full lg:ml-5">
                   <label  className="block mb-1 text-md font-medium">Amount <label className="text-extrabold text-lg text-red-600">*</label></label>
                    {/* bg-green-50 border-green-500 text-green-900 text-green-400 placeholder-green-700 placeholder-green-500 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 bg-gray-700 border-green-500  */}
                   <input type="number" name="amount" onChange={(e)=>{onChangeHandler(e)}} value={expenseData.amount||''} min={0} className="outline-none text-md rounded-lg block w-full p-2.5 bg-gray-700 border border-gray-600 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="₹2000"/>
                    {/* <p className="mt-2 text-sm text-green-500"><span className="font-medium">Well done!</span> Some success message.</p>  */}
                 </div>
-                <div className="mb-6">  
+                <div className="mb-4 sm:mb-6">  
                 <label  className="block mb-1 text-md font-medium">On which date the expense occured <label className="text-extrabold text-lg text-red-600">*</label></label>
                   <div className="relative max-w-sm">
                     <input  type="date" name="dateOfTransaction" onChange={(e)=>{onChangeHandler(e)}} value={expenseData.dateOfTransaction} className="bg-gray-50 border outline-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date"/>
                   </div>
                 </div>
-                <div className="mb-6">
+                <div className="mb-4 sm:mb-6">
                     <label htmlFor="description" className="block mb-1 text-md font-medium text-gray-900 dark:text-white">Add Description</label>
                     <textarea id="description" name="description" value={expenseData.description} onChange={(e)=>{onChangeHandler(e)}} rows="4" className="block p-2.5 w-full outline-none text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Add a note for your expense">
                       

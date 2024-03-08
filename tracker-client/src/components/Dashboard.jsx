@@ -16,6 +16,8 @@ export default function Dashboard() {
   const [spent,setSpent] = useState(initialSav)
   let transactions = useSelector((state) => state.transaction);
   const filterTransactionsByMonth =async  (transactions, year = new Date().getFullYear(), month = new Date().getMonth()) => { 
+    if(transactions == [])
+    return initialSav
     let expense = 0
     let groups = {...initialSav}
      await transactions.filter(transaction => {

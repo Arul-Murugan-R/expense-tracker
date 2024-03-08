@@ -28,29 +28,30 @@ export default function Activities () {
           Available Filters
         </h2>
         <div className="lg:mb-5 mb-3">
-          <label for="category">Category</label>
+          <label htmlFor="category">Category</label>
           <select
             id="category"
             className="outline-none text-md rounded-lg block w-full p-2.5 bg-gray-700 border border-gray-600 focus:ring-blue-500 focus:border-blue-500"
           >
-            <option selected>On what category</option>
-            <option value="1">Food</option>
-            <option value="2">Entertainment</option>
-            <option value="3">Education</option>
-            <option value="4">Health Care</option>
-            <option value="5">Shopping</option>
-            <option value="6">Travel</option>
-            <option value="7">Others</option>
+            <option value="">On which category</option>
+            <option value="food">Food</option>
+            <option value="entertainment">Entertainment</option>
+            <option value="education">Education</option>
+            <option value="health">Health Care</option>
+            <option value="shopping">Shopping</option>
+            <option value="travel">Travel</option>
+            <option value="others">Others</option>
           </select>
         </div>
         <div className="lg:mb-5 mb-3">
-          <label for="mode">Transaction Mode</label>
+          <label htmlFor="mode">Transaction Mode</label>
           <select
             id="mode"
             className="outline-none text-md rounded-lg block w-full p-2.5 bg-gray-700 border border-gray-600 focus:ring-blue-500 focus:border-blue-500"
           >
-            <option>Expense</option>
-            <option>Income</option>
+            <option value="">Both</option>
+            <option value="expense">Expense</option>
+            <option value="income">Income</option>
           </select>
         </div>
         <div className="mb-6">  

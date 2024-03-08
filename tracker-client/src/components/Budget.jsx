@@ -41,11 +41,11 @@ export default function Budget() {
             <option value="7">Others</option>
           </select>
         </div>
-        <div class="mb-3 inline-block lg:w-full">
-                  <label  class="block mb-1 text-md font-medium">Budget Percentage</label>
+        <div className="mb-3 inline-block lg:w-full">
+                  <label  className="block mb-1 text-md font-medium">Budget Percentage</label>
                    {/* bg-green-50 border-green-500 text-green-900 text-green-400 placeholder-green-700 placeholder-green-500 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 bg-gray-700 border-green-500  */}
-                  <input type="number" class="outline-none text-md rounded-lg block w-full p-2.5 bg-gray-700 border border-gray-600 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="15%"/>
-                   {/* <p class="mt-2 text-sm text-green-500"><span class="font-medium">Well done!</span> Some success message.</p>  */}
+                  <input type="number" className="outline-none text-md rounded-lg block w-full p-2.5 bg-gray-700 border border-gray-600 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="15%"/>
+                   {/* <p className="mt-2 text-sm text-green-500"><span className="font-medium">Well done!</span> Some success message.</p>  */}
         </div>
         <div className='text-md text-red-500 mb-3'>Note : The sum of percentage of budget list to be less than or equal to 100%</div>
         <div>
@@ -63,10 +63,10 @@ export default function Budget() {
         <div className="text-white grid gap-2 w-full h-full">
         <div className='bg-slate-700 p-3'>
           <h6 className="text-2xl text-bold text-yellow-500">
-            Saving
+            Month Income
           </h6>
           <h3 className="text-xl text-bold">
-            ₹{income || 10000.00}
+            ₹{income}
           </h3>
         </div>
         <h2 className="text-2xl text-extrabold">Budget on income</h2>
