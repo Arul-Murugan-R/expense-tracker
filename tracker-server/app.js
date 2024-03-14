@@ -7,7 +7,9 @@ const app = express()
 const mongoConnect = require('./util/database').mongoConnect;
 
 const authRoute = require('./routes/auth')
-const transactionRoute = require('./routes/transaction')
+const transactionRoute = require('./routes/transaction');
+const status = require('./middleware/status');
+const User = require('./models/user');
 
 app.use(bodyParser.json());
 app.use((req,res,next) => {
@@ -19,6 +21,33 @@ app.use((req,res,next) => {
 
 app.use('/auth',authRoute)
 app.use('/transaction',transactionRoute)
+app.post('/setbudget',status,async (req,res,next)=>{
+    try{
+        const {budget} = req.body
+        const user = await User.findById(req.userId)
+        if(!user){
+            throw new Error("User does not exists")
+        }
+        console.log(user)
+        user.id = user._id
+        delete user._id
+        user.budget = budget
+        console.log(user)
+        const {name,email,password,savings,monthlyIncome,id} = user
+        const updatedUser = new User(name,email,password,savings,budget,monthlyIncome,id)
+        await updatedUser.save()
+        res.status(201).json({
+            message:'Budget Updated Successfully!!', budget
+        })
+        
+    }catch(err){
+        console.log(err)
+        if(!err.statusCode){
+            err.statusCode = 422
+        }
+        next(err)
+    }
+})
 
 app.use('/',(req,res)=>{
     res.status(200).json({message:'Everything works fine on the server side'})

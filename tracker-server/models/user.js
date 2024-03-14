@@ -5,7 +5,7 @@ const ObjectId = mongodb.ObjectId;
 
 class User{
     constructor(name,email,password,savings,budget,monthlyIncome,id){
-        this._id = id;
+        this._id = id ? id : null;
         this.name = name
         this.email = email
         this.password = password
@@ -16,7 +16,22 @@ class User{
 
     save() {
         const db = getDb();
-        return db.collection('users').insertOne(this);
+        let dbOp;
+        if (this._id) {
+          // Update the transaction
+          dbOp = db
+            .collection('users')
+            .updateOne({ _id: this._id }, { $set: this });
+        } else {
+          dbOp = db.collection('users').insertOne(this);
+        }
+        return dbOp
+          .then(result => {
+            console.log(result);
+          })
+          .catch(err => {
+            console.log(err);
+          });
       }
     
     static findOne(props){

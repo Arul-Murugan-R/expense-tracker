@@ -73,7 +73,7 @@ export default function Dashboard() {
             <img className={`${budMod[key].background}`} src={`/icons/${key}.png`} alt="" />
           </span>
           <h3>
-            ₹ {sortSpent(spent)[key]}/<small>{(user.budget[key] / 100)*spent.salary}</small>
+            ₹ <span className={`${sortSpent(spent)[key] > (user.budget[key] / 100)*spent.salary && "text-red-600"}`}>{sortSpent(spent)[key]}</span>/<small>{(user.budget[key] / 100)*spent.salary}</small>
           </h3>
           <p>{key[0].toUpperCase() + key.slice(1)}</p>
         </div>)
@@ -154,7 +154,7 @@ export default function Dashboard() {
         </div>
         <div className="card p-4 mt-3 lg:ml-3 overflow-auto inline-block">
           <h2>
-            Category
+            Budgets
             <Link to="/budget" className="text-sm float-end text-blue-700 underline">
               See all
             </Link>

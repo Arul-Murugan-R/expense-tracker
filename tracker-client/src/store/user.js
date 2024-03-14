@@ -14,6 +14,11 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
+    setBudget(state,action){
+      const { budget } = action.payload;
+      state.budget = budget
+      return state;
+    },
     checkState(state, action) {
       console.log(localStorage.getItem("token"));
       // state = localStorage.getItem('token').user
