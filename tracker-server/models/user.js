@@ -28,6 +28,7 @@ class User{
         return dbOp
           .then(result => {
             console.log(result);
+            return result;
           })
           .catch(err => {
             console.log(err);
