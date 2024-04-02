@@ -73,6 +73,7 @@ export default function Signup() {
         <input
           type="text"
           name="name"
+          autoComplete='off'
           onChange={(e)=>{onChangeHandler(e)}}
           id="userName"
           className="shadow-sm outline-none border text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500 shadow-sm-light"
@@ -92,7 +93,7 @@ export default function Signup() {
           name="email"
           onChange={(e)=>{onChangeHandler(e)}}
           id="email"
-          autoComplete={false}
+          autoComplete='off'
           className="shadow-sm outline-none border text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500 shadow-sm-light"
           placeholder="user@gmail.com"
           required
@@ -139,12 +140,12 @@ export default function Signup() {
             >
               <path
                 stroke="currentColor"
-                stroke-width="2"
+                strokeWidth="2"
                 d="M21 12c0 1.2-4 6-9 6s-9-4.8-9-6c0-1.2 4-6 9-6s9 4.8 9 6Z"
               />
               <path
                 stroke="currentColor"
-                stroke-width="2"
+                strokeWidth="2"
                 d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
               />
             </svg>
@@ -181,12 +182,12 @@ export default function Signup() {
             >
               <path
                 stroke="currentColor"
-                stroke-width="2"
+                strokeWidth="2"
                 d="M21 12c0 1.2-4 6-9 6s-9-4.8-9-6c0-1.2 4-6 9-6s9 4.8 9 6Z"
               />
               <path
                 stroke="currentColor"
-                stroke-width="2"
+                strokeWidth="2"
                 d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
               />
             </svg>

@@ -35,7 +35,7 @@ route.post('/verify',async (req, res, next) => {
 })
 route.post('/login',
 [
-    body('email').not().isEmpty().withMessage('Requires Email').custom((val,{req})=>{
+    body('email').not().isEmail().withMessage('Enter a valid Email Address').custom((val,{req})=>{
         return User.findOne({email:val})
         .then((result)=>{
             if(!result){
@@ -104,7 +104,9 @@ route.use('/login',(req, res,next)=>{
 route.post('/signup',
 [
     body('name').not().isEmpty().withMessage('Requires Name'),
-    body('email').not().isEmpty().withMessage('Requires Email').custom((val,{req})=>{
+    body('email').not().isEmpty().withMessage('Email is empty')
+    .isEmail().withMessage('Enter a valid Email Address')
+    .custom((val,{req})=>{
         return User.findOne({email:val})
         .then((result)=>{
             console.log(result)
@@ -113,7 +115,7 @@ route.post('/signup',
             }
         })
     }),
-    body('password').not().isEmpty().withMessage('Password is Empty'),
+    body('password').not().isEmpty().withMessage('Password is Empty').isLength({min:5}).withMessage("The password is too short"),
     body('cpassword').not().isEmpty().withMessage('Confirm Password is Empty')
     
 ],
