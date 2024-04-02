@@ -29,3 +29,7 @@ and gain valuable insights into their financial habits.
 ## Authentication:
 
 - JWT (JSON Web Tokens)
+
+## Deployed on Vercel
+https://expense-tracker-jrbt.vercel.app/
+
