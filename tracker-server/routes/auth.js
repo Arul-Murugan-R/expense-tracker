@@ -35,7 +35,7 @@ route.post('/verify',async (req, res, next) => {
 })
 route.post('/login',
 [
-    body('email').not().isEmail().withMessage('Enter a valid Email Address').custom((val,{req})=>{
+    body('email').not().isEmpty().withMessage('Email is Empty').custom((val,{req})=>{
         return User.findOne({email:val})
         .then((result)=>{
             if(!result){

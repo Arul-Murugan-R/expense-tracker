@@ -60,15 +60,23 @@ export const verifyToken = () => {
           body: JSON.stringify({token})
       })
       if(!response.ok){
-        throw new Error(response.message)
+        const result = await response.json()
+        throw result
       }
       const result = await response.json()
       await dispatch(transactionAction.setTransaction({transaction:result.transactions}))
       await dispatch(userActions.setUser({token,user:result.user}));
     }
     catch (error) {
-        console.log(error.message)
+        console.log(error)
+        localStorage.clear()
+        await dispatch(userActions.removeUser())
+        if(error.error)
+        {await dispatch(SnackActions.setSnack({title:'store',message:error.error.message}))
+        }
+        else
         await dispatch(SnackActions.setSnack({title:'store',message:error.message}))
+
     }
     };
 

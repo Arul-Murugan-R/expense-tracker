@@ -44,13 +44,11 @@ export default function Budget() {
         }else
         sumPercent += +budget[i]
       }
-      console.log(sumPercent)
       if(sumPercent > 100){
         dispatch(SnackActions.setSnack({title:'Error Occurred',message:"The sum of percentage of budget list to be less than or equal to 100%"}))
         return;
       }
       budget[budgetFilter.category] = budgetFilter.percent
-      console.log(budget)
     fetch(backendUrl + '/setbudget', {
       method: "POST",
       headers: {
@@ -66,7 +64,7 @@ export default function Budget() {
       }
       const data = await res.json();
       // console.log(data,'1');
-      console.log(data)
+      // console.log(data)
       dispatch(userActions.setBudget({budget:data.budget}))
       dispatch(SnackActions.setSnack({title:'Updation',message:'Budget Updated!!'}))
       // setIsLoading(false);
@@ -75,7 +73,7 @@ export default function Budget() {
         percent:''
       });
   }).catch((err) => {
-      console.log(err)
+      // console.log(err)
       dispatch(SnackActions.setSnack({title:'Error Occurred',message:err.message}))
   })
     }
@@ -89,12 +87,11 @@ export default function Budget() {
     <div className="lg:flex text-white gap-10">
         <div className='card lg:w-[500px] mb-10 lg:max-h-[350px]'>
         <div className="lg:mb-5 mb-3">
-          <label for="category">Category</label>
+          <label htmlFor="category">Category</label>
           <select
             id="category"
             onChange={(e)=>setOnChange(e)}
             name='category'
-            defaultValue={budgetFilter.category}
             value={budgetFilter.category}
             className="outline-none text-md rounded-lg block w-full p-2.5 bg-gray-700 border border-gray-600 focus:ring-blue-500 focus:border-blue-500"
           >
@@ -171,7 +168,7 @@ export default function Budget() {
                     <p>{user.budget[cat.category.toLowerCase()]}%</p>
                     <p>₹{(user.budget[cat.category.toLowerCase()] / 100)*income}</p>
                     <img onClick={()=>{
-                      console.log(budgetFilter)
+                      // console.log(budgetFilter)
                       setFilter({
                         category:cat.category.toLowerCase(),
                         percent:user.budget[cat.category.toLowerCase()]

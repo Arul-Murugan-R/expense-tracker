@@ -38,10 +38,15 @@ route.post('/remove',status,async(req,res,next)=>{
 })
 
 route.post('/add-expense',status,[
-    body('purpose').not().isEmpty().withMessage('Requires purpose'),
+    body('purpose').not().isEmpty().withMessage('Requires purpose')
+    .isLength({max:20}).withMessage("Length of Purpose should be less than 20"),
     body('category').not().isEmpty().withMessage('Requires Category'),
     body('amount').not().isEmpty().withMessage('Requires Amount')
-    // .custom((val,{req})=>{
+    .custom((val,{req})=>{
+        if(val == 0){
+            throw new Error('Enter the amount')
+        }
+        return true;
     //     console.log(req.userId,'test')
     //     return User.findById(req.userId.toString())
     //     .then((result)=>{
@@ -50,7 +55,7 @@ route.post('/add-expense',status,[
     //             return Promise.reject('Your expense is greater than your savings')
     //         }
     //     })
-    // })
+    })
     ,
     body('dateOfTransaction').not().isEmpty().withMessage('Requires Date of Expense')
     // .custom((val,{req})=>{
@@ -93,18 +98,23 @@ route.post('/add-expense',status,[
 
 
 route.post('/add-income',status,[
-    body('purpose').not().isEmpty().withMessage('Requires purpose'),
+    body('purpose').not().isEmpty().withMessage('Requires purpose')
+    .isLength({max:20}).withMessage("Length of Purpose should be less than 20"),
     body('amount').trim().not().isEmpty().withMessage('Requires Amount')
-    // .custom((val,{req})=>{
-    //     console.log(req.userId,'test')
-    //     return User.findById(req.userId.toString())
-    //     .then((result)=>{
-    //         console.log(result)
-    //         if(result.savings < val){
-    //             return Promise.reject('Your expense is greater than your savings')
-    //         }
-    //     })
-    // })
+    .custom((val,{req})=>{
+        if(val == 0){
+            throw new Error("Enter the amount")
+        }
+        return true;
+        // console.log(req.userId,'test')
+        // return User.findById(req.userId.toString())
+        // .then((result)=>{
+        //     console.log(result)
+        //     if(result.savings < val){
+        //         return Promise.reject('Your expense is greater than your savings')
+        //     }
+        // })
+    })
     ,
     body('dateOfTransaction').not().isEmpty().withMessage('Requires Date of Income')
     // .custom((val,{req})=>{

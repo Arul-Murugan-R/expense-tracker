@@ -56,12 +56,12 @@ const onSubmitHandler = (e) =>{
   })
 }
   return (
-    <div className="max-w-sm mx-auto mt-24 sm:mt-36 text-white sm:p-0 px-2 grid gap-3">
+    <form className="max-w-sm mx-auto mt-24 sm:mt-36 text-white sm:p-0 px-2 grid gap-3">
       <Link to="/" className="text-md">{`< Home`}</Link>
       {/* <h2 className="text-xl">Login</h2> */}
       <div>
         <label htmlFor="email" className="block mb-2 text-sm font-medium ">
-          Your email
+          Your email<label className='text-red-500'>*</label>
         </label>
         <input
           type="email"
@@ -77,7 +77,7 @@ const onSubmitHandler = (e) =>{
       </div>
       <div>
         <label htmlFor="password" className="block mb-2 text-sm font-medium ">
-          Your password
+          Your password<label className='text-red-500'>*</label>
         </label>
         <div className="relative max-w-sm">
         <div className="absolute inset-y-0 end-3 flex items-center ps-3.5 cursor-pointer z-1"
@@ -133,6 +133,6 @@ const onSubmitHandler = (e) =>{
       <h3 className="text-md text-white text-center pt-2">
         Want a new account ? <Link to="/auth/signup" className='text-blue-500 underline'>Signup</Link>
       </h3>
-    </div>
+    </form>
   );
 }

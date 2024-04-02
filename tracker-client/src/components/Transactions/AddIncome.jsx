@@ -110,6 +110,7 @@ export default function AddIncome() {
           <input
             type="text"
             name="purpose"
+            autoComplete="off"
             onChange={(e) => {
               onChangeHandler(e);
             }}
@@ -125,6 +126,7 @@ export default function AddIncome() {
           <input
             type="number"
             name="amount"
+            autoComplete="off"
             onChange={(e) => {
               onChangeHandler(e);
             }}

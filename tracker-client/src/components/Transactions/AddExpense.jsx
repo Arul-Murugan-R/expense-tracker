@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from 'axios'
 import { SnackActions } from '../../store/SnackStore';
 import { transactionAction } from '../../store/transaction';
@@ -19,12 +19,29 @@ export default function AddExpense() {
   const navigate = useNavigate()
   const {id} = useParams()
   const [isLoading,setIsLoading] = useState(false)
+  const [income,setIncome] = useState(0)
+  const transactions = useSelector((state)=>state.transaction)
   const transaction = useSelector((state)=>state.transaction).find((rec)=>rec._id==id)
   const [expenseData,setData] = useState(initialState)
+  const filterTransactionsByMonth = (transactions, year = new Date().getFullYear(), month = new Date().getMonth()) => {
+    let amount = 0 
+    transactions.filter(transaction => {
+      const transactionDate = new Date(transaction.dateOfTransaction);
+      if(transactionDate.getFullYear() === year && transactionDate.getMonth() === month && transaction.category == "salary"){
+          amount += parseInt(transaction.amount)
+      }
+    });
+    // console.log(amount)
+    setIncome(amount)
+    };
   useEffect(()=>{
     if(id)
     setData(transaction)
   },[id])
+  useEffect(()=>{
+    filterTransactionsByMonth(transactions)
+  },[])
+
   const onChangeHandler = (e) => {
     const { name, value } = e.target
     setData({ ...expenseData, 
@@ -102,7 +119,7 @@ const onRemoveHandler = (e) =>{
               {`Purpose is to be of length >= 0`}
             </h1> */}
             <h2 className="text-white text-2xl font-extrabold">Add Expense</h2>
-            <div className="text-white mt-5" >
+            <div className="text-white mt-1" >
                 <div className="mb-4 sm:mb-6">
                     <label  className="block mb-1 text-md font-medium ">Purpose <label className="text-extrabold text-lg text-red-600">*</label></label>
                     <input type="text" autoComplete='off' name="purpose" onChange={(e)=>{onChangeHandler(e)}} value={expenseData.purpose} className="outline-none text-md rounded-lg block w-full p-2.5 bg-gray-700 border border-gray-600 focus:ring-blue-500 focus:border-blue-500" placeholder="Reason for the expense"/>
@@ -139,8 +156,16 @@ const onRemoveHandler = (e) =>{
                       
                     </textarea>
                 </div>
+                {!income && 
+                <div className='mb-3'>
+                <label className='text-red-500'>** You cannot add expense to your wallet, your income of this month is empty **</label>
+                <Link className='underline text-blue-700' to="/add/income">Add Income</Link>
+                </div>
+                } 
                 <div className='flex gap-5'>
-                <button onClick={(e)=>onSubmitHandler(e)} className="flex place-items-center justify-center gap-3 p-3 rounded-lg bg-transparent border border-yellow-500 text-yellow-400 w-64">
+                <button
+                disabled={income == 0}
+                onClick={(e)=>onSubmitHandler(e)} className="disabled:cursor-not-allowed disabled:bg-gray-700 disabled:border-0 flex place-items-center justify-center gap-3 p-3 rounded-lg bg-transparent border border-yellow-500 text-yellow-400 w-64">
                 {isLoading=="submit" &&<div>
                   <svg class="w-8 h-8 animate-spin text-transparent fill-yellow-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>

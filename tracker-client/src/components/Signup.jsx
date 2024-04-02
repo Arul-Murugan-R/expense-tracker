@@ -60,7 +60,7 @@ export default function Signup() {
   };
 
   return (
-    <div className="max-w-sm mx-auto mt-10 sm:mt-20 grid gap-2 text-white sm:p-0 px-2">
+    <form className="max-w-sm mx-auto mt-10 sm:mt-20 grid gap-2 text-white sm:p-0 px-2">
       <Link to="/" className="text-md">{`< Home`}</Link>
       {/* <h2 className="text-white text-xl">Sign Up</h2> */}
       <div>
@@ -68,7 +68,7 @@ export default function Signup() {
           htmlFor="userName"
           className="block mb-2 text-sm font-medium text-white"
         >
-          Username
+          Username<label className='text-red-500'>*</label>
         </label>
         <input
           type="text"
@@ -86,7 +86,7 @@ export default function Signup() {
           htmlFor="email"
           className="block mb-2 text-sm font-medium text-white"
         >
-          Your email
+          Your email<label className='text-red-500'>*</label>
         </label>
         <input
           type="email"
@@ -123,7 +123,7 @@ export default function Signup() {
           htmlFor="password"
           className="block mb-2 text-sm font-medium text-white"
         >
-          Your password
+          Your password<label className='text-red-500'>*</label>
         </label>
         <div className="relative max-w-sm">
           <div className="absolute inset-y-0 end-3 flex items-center ps-3.5 cursor-pointer z-1">
@@ -165,7 +165,7 @@ export default function Signup() {
           htmlFor="cpassword"
           className="block mb-2 text-sm font-medium text-white"
         >
-          Repeat password
+          Repeat password<label className='text-red-500'>*</label>
         </label>
         <div className="relative max-w-sm">
           <div className="absolute inset-y-0 end-3 flex items-center ps-3.5 cursor-pointer z-1">
@@ -197,7 +197,7 @@ export default function Signup() {
             name="cpassword"
             id="cpassword"
             onChange={(e)=>{onChangeHandler(e)}}
-            className="shadow-sm border text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500 shadow-sm-light"
+            className="outline-none shadow-sm border text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500 shadow-sm-light"
             required
           />
         </div>
@@ -219,6 +219,6 @@ export default function Signup() {
       <h3 className="text-md text-white text-center pt-2">
         Already have a account ? <Link to="/auth/Login" className='text-blue-500 underline'>Login</Link>
       </h3>
-    </div>
+    </form>
   );
 }
